@@ -22,9 +22,13 @@
 
 ## 動作環境とインストール
 
-現在の開発・操作説明は主にmacOSを対象としています。Python 3.10以降と、PyMuPDF・Pillow・PySide6が必要です。依存ライブラリが対応するPythonを使用してください。
+Python 3.10以降と、PyMuPDF・Pillow・PySide6が必要です。使用するOS・Pythonのバージョンに対応した依存ライブラリをインストールしてください。GitとPythonをあらかじめ用意してください。
 
-GitHubからソースコードを取得し、ターミナルで次のコマンドを実行します。初回のみ、仮想環境を作成してアプリ本体と必要なライブラリをインストールします。
+**動作確認済み：macOS（Apple Silicon）。Windows・Linuxは未検証です。** 以下のWindows向けコマンドは、動作確認済みの手順ではなく、試用のための案内です。Windows・LinuxでのGUI操作やOCR後の復元結果は、まだ保証していません。現時点では、各OS向けのダブルクリックで起動できるアプリは配布しておらず、Pythonソースから起動します。
+
+初回のみ、GitHubからソースコードを取得し、仮想環境へアプリ本体と必要なライブラリをインストールします。お使いのOSに対応する手順を選んでください。
+
+### macOS（ターミナル・動作確認済み）
 
 ```bash
 git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
@@ -35,18 +39,37 @@ python3 -m pip install -e .
 python3 -m pdf_workbench
 ```
 
-最後の `python3 -m pdf_workbench` が**GUIを開くコマンド**です。実行するとPDF Workbenchのウィンドウが表示されます。閉じるときはウィンドウを終了してください。現時点では、ダブルクリックで起動するmacOSアプリ（`.app`）は配布していません。
+最後の `python3 -m pdf_workbench` でGUIが開きます。閉じるときはウィンドウを終了してください。
+
+### Windows（PowerShell・未検証の試用手順）
+
+```powershell
+git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
+cd pdf-workbench-public
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pdf_workbench
+```
+
+`py -3` でPython 3.10以降の対応バージョンが選択される環境を想定しています。Windows用の手順では仮想環境内のPythonを直接呼び出すため、PowerShellで仮想環境を有効化する必要はありません。GUIが起動しても、分割・復元を含む動作確認が済んだことにはなりません。
 
 ### 2回目以降にGUIを開く
 
-ターミナルを開き、初回に取得した `pdf-workbench-public` フォルダへ移動してから、次の2行を実行します。**毎回のインストールは不要です。**
+ターミナル／PowerShellで、初回に取得した `pdf-workbench-public` フォルダへ移動し、お使いのOSに応じて以下を実行してください。**毎回のインストールは不要です。**
+
+macOS：
 
 ```bash
-source .venv/bin/activate
-python3 -m pdf_workbench
+./.venv/bin/python -m pdf_workbench
 ```
 
-仮想環境の有効化を省きたい場合は、同じフォルダで `./.venv/bin/python -m pdf_workbench` としても起動できます。`python3 -m pip install -r requirements.txt` は依存ライブラリ（pytestを含む）だけをインストールする手順であり、アプリ本体のインストールには別途 `python3 -m pip install -e .` が必要です。
+Windows（PowerShell・未検証）：
+
+```powershell
+.\.venv\Scripts\python.exe -m pdf_workbench
+```
+
+`requirements.txt` を使う場合、`python3 -m pip install -r requirements.txt` は依存ライブラリ（pytestを含む）を導入する手順であり、アプリ本体のインストールには別途 `python3 -m pip install -e .` が必要です。
 
 ## 基本の使い方
 
