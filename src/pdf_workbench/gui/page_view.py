@@ -8,6 +8,7 @@ from PySide6.QtGui import (
     QColor,
     QFont,
     QKeyEvent,
+    QKeySequence,
     QNativeGestureEvent,
     QPainterPath,
     QPainterPathStroker,
@@ -347,6 +348,50 @@ class PageView(QGraphicsView):
             self.on_custom_selected(path)
         self.setFocus()
         self._rebuild_lines()
+        return True
+
+    def select_all_custom_regions(self) -> bool:
+        """Select all leaf regions of the visible page, without editing it."""
+        if (
+            self._settings is None
+            or self._settings.mode != SplitMode.CUSTOM
+            or self._reorder_targets is not None
+        ):
+            return False
+        order = self._reading_order()
+        if not order:
+            return False
+        self._selected_custom_paths = set(order)
+        if self._active_custom_path not in self._selected_custom_paths:
+            self._active_custom_path = order[0]
+        self._selected_custom_line_path = None
+        self._rebuild_lines()
+        if self.on_custom_selected:
+            self.on_custom_selected(self._active_custom_path)
+        return True
+
+    def clear_custom_multi_selection(self) -> bool:
+        """Escape leaves the active region selected, clearing added regions."""
+        if (
+            self._settings is None
+            or self._settings.mode != SplitMode.CUSTOM
+            or self._reorder_targets is not None
+        ):
+            return False
+        if len(self._selected_custom_paths) <= 1 and self._selected_custom_line_path is None:
+            return False
+        order = self._reading_order()
+        if not order:
+            return False
+        active = self._active_custom_path
+        if active not in order:
+            active = order[0]
+        self._selected_custom_paths = {active}
+        self._active_custom_path = active
+        self._selected_custom_line_path = None
+        self._rebuild_lines()
+        if self.on_custom_selected:
+            self.on_custom_selected(active)
         return True
 
     def begin_custom_reorder(self, paths: set[CustomPath]) -> bool:
@@ -699,6 +744,16 @@ class PageView(QGraphicsView):
                 return
             super().keyPressEvent(event)
             return
+
+        if event.matches(QKeySequence.StandardKey.SelectAll):
+            if self.select_all_custom_regions():
+                event.accept()
+                return
+
+        if event.key() == Qt.Key.Key_Escape:
+            if self.clear_custom_multi_selection():
+                event.accept()
+                return
 
         if event.key() in {Qt.Key.Key_Return, Qt.Key.Key_Enter} and self._settings is not None and self._settings.mode == SplitMode.CUSTOM:
             direction = (
