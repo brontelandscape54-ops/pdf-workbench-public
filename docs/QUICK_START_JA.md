@@ -16,6 +16,8 @@ PDF WorkbenchでPDFの分割設定を作り、**外部OCRに渡すPDFを書き�
 
 ![1ページ目を4領域に分割し、OCR出力順を確認する画面](images/01-four-split-page1.jpg)
 
+中央プレビュー内をクリックして⌘A（Windows/LinuxではCtrl+A）を押すと、表示中のページの全分割領域を選択できます。Escで複数選択を解除します。左側サムネイルのページ選択は変更されず、領域を選択しただけでは分割設定は変わりません。
+
 赤い分割線をドラッグして位置を調整できます。分割線が本文に重なると文字が切れるおそれがあるため、**本文のない余白を通るように**動かしてください。選択領域をさらに分割したり、分割線を削除・統合したり、OCR出力順を変更したりすることもできます。
 
 ## 3. 2ページ目は分割しない
@@ -64,4 +66,4 @@ OCR結果PDFができたらWorkbenchの **Restore OCR Results…** で、OCR Bun
 
 ---
 
-さらに詳しい機能・制約は[公開版README](../README.md)を、Bundleの形式は[保存形式と互換性](bundle-schema-migrations.md)を参照してください。
+さらに詳しい機能・制約は[公開版README](../README.md)を、開発の背景は[開発経緯と設計思想](DEVELOPMENT_BACKGROUND_JA.md)を、Bundleの形式は[保存形式と互換性](bundle-schema-migrations.md)を参照してください。
