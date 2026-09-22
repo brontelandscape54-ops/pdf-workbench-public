@@ -52,7 +52,9 @@ You do not need to reinstall the package on every launch. Alternatively, run `./
 
 After the editable installation, install the test dependency with `python3 -m pip install 'pytest>=8,<9'`, then run `python3 -m pytest`. GUI verification requires a graphical desktop environment.
 
-On September 22, 2026, the release candidate was installed in a fresh virtual environment on macOS (Apple Silicon) with Python 3.10.4, PyMuPDF 1.28.2, PySide6 6.11.2, Pillow 12.3.0, and pytest 8.4.2. **All 94 automated tests passed (five deprecation warnings)**, and the GUI launched on the test machine. An end-to-end run with an external OCR application was **not** part of this verification; results on other platforms have not been confirmed.
+On September 22, 2026, the public edition was installed in a fresh macOS (Apple Silicon) virtual environment using Python 3.10.4, PyMuPDF 1.28.2, PySide6 6.11.2, Pillow 12.3.0, and pytest 8.4.2. **All 99 automated tests passed (five deprecation warnings)**, and the GUI launched. The central preview's ⌘A region selection was checked interactively in the development edition. An external-OCR split/restore workflow was also exercised in the public edition.
+
+**External-OCR field check (same date; one document):** A four-page, vertically typeset, scanned 1983 periodical was split after adjusting region output order, processed with external OCR, and restored to four pages. The supplied restored PDF retains page images and extractable text. In particular, an article on page 3 now starts with its title and introduction instead of its later section as in an earlier run. The OCR engine and version were not recorded. This is **not** a byte-by-byte or text-position comparison of the original, split, OCR-output, and restored PDFs; boundary-character loss, exact search-hit placement, quantitative recognition accuracy, and interoperability across engines/documents remain unverified. The source publication and OCR text are not distributed with this repository. Results on other platforms have not been confirmed.
 
 ## Working with pages
 
