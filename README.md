@@ -21,16 +21,29 @@
 
 現在の開発・操作説明は主にmacOSを対象としています。Python 3.10以降と、PyMuPDF・Pillow・PySide6が必要です。依存ライブラリが対応するPythonを使用してください。
 
-リポジトリを取得し、ターミナルでリポジトリのフォルダへ移動してから、次のように実行します。
+GitHubからソースコードを取得し、ターミナルで次のコマンドを実行します。初回のみ、仮想環境を作成してアプリ本体と必要なライブラリをインストールします。
 
 ```bash
+git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
+cd pdf-workbench-public
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -e .
 python3 -m pdf_workbench
 ```
 
-`python3 -m pip install -r requirements.txt` は依存ライブラリ（pytestを含む）をインストールする手順であり、これだけではアプリ本体をインストールしません。別途 `python3 -m pip install -e .` を実行してください。インストール後は `pdf-workbench` コマンドでも起動できます。
+最後の `python3 -m pdf_workbench` が**GUIを開くコマンド**です。実行するとPDF Workbenchのウィンドウが表示されます。閉じるときはウィンドウを終了してください。現時点では、ダブルクリックで起動するmacOSアプリ（`.app`）は配布していません。
+
+### 2回目以降にGUIを開く
+
+ターミナルを開き、初回に取得した `pdf-workbench-public` フォルダへ移動してから、次の2行を実行します。**毎回のインストールは不要です。**
+
+```bash
+source .venv/bin/activate
+python3 -m pdf_workbench
+```
+
+仮想環境の有効化を省きたい場合は、同じフォルダで `./.venv/bin/python -m pdf_workbench` としても起動できます。`python3 -m pip install -r requirements.txt` は依存ライブラリ（pytestを含む）だけをインストールする手順であり、アプリ本体のインストールには別途 `python3 -m pip install -e .` が必要です。
 
 ## 基本の使い方
 
