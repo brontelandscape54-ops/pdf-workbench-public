@@ -21,16 +21,29 @@ The original PDF is not modified by opening, editing, or exporting it.
 - Python 3.10 or later
 - PyMuPDF, Pillow, PySide6
 
-From a checked-out repository, using a Python version compatible with the listed dependencies:
+For the first run, open Terminal and clone the repository. Create a virtual environment, install the package and dependencies, then launch the GUI:
 
 ```bash
+git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
+cd pdf-workbench-public
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -e .
 python3 -m pdf_workbench
 ```
 
-Alternatively, `python3 -m pip install -r requirements.txt` installs the listed dependencies (including pytest); install this package with `python3 -m pip install -e .` as well before launching from an ordinary checkout. After editable installation, the `pdf-workbench` console command is also available.
+The final `python3 -m pdf_workbench` command **opens the GUI**. The application is currently distributed as Python source, not as a double-clickable macOS `.app` bundle.
+
+### Launching the GUI on subsequent occasions
+
+Open Terminal, return to the same `pdf-workbench-public` directory, then run:
+
+```bash
+source .venv/bin/activate
+python3 -m pdf_workbench
+```
+
+You do not need to reinstall the package on every launch. Alternatively, run `./.venv/bin/python -m pdf_workbench` from the repository directory without activating the environment. Installing `requirements.txt` alone only installs listed dependencies (including pytest); installing the application itself requires `python3 -m pip install -e .`.
 
 ## Running the tests
 
