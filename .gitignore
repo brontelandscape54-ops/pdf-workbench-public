@@ -1,0 +1,22 @@
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# Personal working data
+input/
+output/
+projects/
+logs/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+
+# Generated OCR workspaces contain source paths and may contain documents
+*_ocr_bundle/
+workspace.json
