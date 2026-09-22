@@ -19,12 +19,15 @@ A desktop GUI for preparing PDF pages for external OCR, then restoring a searcha
 
 The original PDF is not modified by opening, editing, or exporting it.
 
-## Requirements and setup (macOS-focused)
+## Requirements and setup (macOS and Windows)
 
-- Python 3.10 or later
-- PyMuPDF, Pillow, PySide6
+Python 3.10 or later, Git, and compatible versions of PyMuPDF, Pillow, and PySide6 are required.
 
-For the first run, open Terminal and clone the repository. Create a virtual environment, install the package and dependencies, then launch the GUI:
+**Verified: macOS (Apple Silicon). Windows and Linux have not been tested.** The Windows PowerShell commands below are suggested trial steps, not a verified installation or compatibility claim. The application is distributed as Python source, not as a double-clickable installer for either OS.
+
+For the first run, clone this repository, create a virtual environment, install the application and its dependencies, then open the GUI. Select the instructions for your OS.
+
+### macOS (Terminal; verified)
 
 ```bash
 git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
@@ -35,18 +38,37 @@ python3 -m pip install -e .
 python3 -m pdf_workbench
 ```
 
-The final `python3 -m pdf_workbench` command **opens the GUI**. The application is currently distributed as Python source, not as a double-clickable macOS `.app` bundle.
+The last command launches the GUI.
 
-### Launching the GUI on subsequent occasions
+### Windows (PowerShell; unverified trial instructions)
 
-Open Terminal, return to the same `pdf-workbench-public` directory, then run:
-
-```bash
-source .venv/bin/activate
-python3 -m pdf_workbench
+```powershell
+git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
+cd pdf-workbench-public
+py -3 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\python.exe -m pdf_workbench
 ```
 
-You do not need to reinstall the package on every launch. Alternatively, run `./.venv/bin/python -m pdf_workbench` from the repository directory without activating the environment. Installing `requirements.txt` alone only installs listed dependencies (including pytest); installing the application itself requires `python3 -m pip install -e .`.
+These instructions assume that `py -3` selects a supported Python version (3.10 or later). They invoke the virtual environment's Python directly, so PowerShell virtual-environment activation and changes to the script execution policy are not required. A successful GUI launch alone would not establish that split/restore has been validated on Windows.
+
+### Launching the GUI subsequently
+
+Return to the `pdf-workbench-public` directory in Terminal or PowerShell. You do not need to reinstall the package every time.
+
+macOS:
+
+```bash
+./.venv/bin/python -m pdf_workbench
+```
+
+Windows (PowerShell; unverified):
+
+```powershell
+.\.venv\Scripts\python.exe -m pdf_workbench
+```
+
+Installing `requirements.txt` alone installs the listed dependencies (including pytest), not the application itself. The editable installation above (`python3 -m pip install -e .`, or the corresponding virtual-environment Python on Windows) installs the application.
 
 ## Running the tests
 
