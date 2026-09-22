@@ -2,13 +2,14 @@
 
 [日本語](README.md) | **English**
 
-For an illustrated walkthrough and a two-page sample PDF, see the [Japanese quick start](docs/QUICK_START_JA.md).
+For an illustrated walkthrough and a two-page sample PDF, see the [Japanese quick start](docs/QUICK_START_JA.md). For project origins and design decisions, see the [development background (Japanese)](docs/DEVELOPMENT_BACKGROUND_JA.md).
 
 A desktop GUI for preparing PDF pages for external OCR, then restoring a searchable OCR-result PDF to the source page layout. PDF Workbench handles the **split / restore** steps, not OCR itself.
 
 ## What the current GUI does
 
 - Open a PDF, browse page thumbnails, and configure each page independently.
+- With the central preview focused, press **⌘A** (Ctrl+A on Windows/Linux) to select all regions on the displayed page. Press Esc to collapse a multi-region selection; selecting alone does not change the layout.
 - Start new pages with **Custom split / one region**. Split a selected region horizontally or vertically, drag a red divider, delete a divider or merge eligible rectangular selections, and adjust the OCR output order.
 - Use **頁全体を4分割** and **分割なし（1領域）** as quick presets; continue editing the resulting Custom layout. The old standalone `No split`, `Horizontal 2 split`, and `4 split` editor modes are no longer shown.
 - Manually apply the current layout to specified pages, selected thumbnails, or all pages. A page lock excludes other pages from bulk replacement without preventing direct edits on the currently displayed page.
@@ -102,6 +103,8 @@ The `manifest.json` and `workspace.json` are **independently versioned**, and bo
 **Before sharing a Bundle**, review its contents: `workspace.json` contains an absolute local path to the original PDF, and an optional embedded `source/original.pdf` contains the source document itself. The manifest is designed not to record the original absolute path.
 
 ## Background
+
+For a fuller account of the motivations and design choices, see [Development background and design principles (Japanese)](docs/DEVELOPMENT_BACKGROUND_JA.md).
 
 PDF Workbench was developed from the concept of [ocr-pdf-cut-to-four](https://github.com/brontelandscape54-ops/ocr-pdf-cut-to-four), a separate command-line tool for splitting two-column PDFs into four OCR-friendly pages. PDF Workbench adds visual, per-page Custom splitting and reversible placement of the externally OCRed PDF. It is a separate project, not a Git-history continuation of the earlier CLI. No particular OCR engine is required.
 
