@@ -2,6 +2,8 @@
 
 [日本語](README.md) | **English**
 
+For an illustrated walkthrough and a two-page sample PDF, see the [Japanese quick start](docs/QUICK_START_JA.md).
+
 A desktop GUI for preparing PDF pages for external OCR, then restoring a searchable OCR-result PDF to the source page layout. PDF Workbench handles the **split / restore** steps, not OCR itself.
 
 ## What the current GUI does
