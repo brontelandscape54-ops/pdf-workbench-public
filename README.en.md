@@ -34,7 +34,9 @@ Alternatively, `python3 -m pip install -r requirements.txt` installs the listed 
 
 ## Running the tests
 
-After the editable installation, install the test dependency with `python3 -m pip install 'pytest>=8,<9'`, then run `python3 -m pytest`. GUI verification requires a graphical desktop environment. These commands are setup instructions, **not** a claim that a release candidate has passed testing on every platform.
+After the editable installation, install the test dependency with `python3 -m pip install 'pytest>=8,<9'`, then run `python3 -m pytest`. GUI verification requires a graphical desktop environment.
+
+On September 22, 2026, the release candidate was installed in a fresh virtual environment on macOS (Apple Silicon) with Python 3.10.4, PyMuPDF 1.28.2, PySide6 6.11.2, Pillow 12.3.0, and pytest 8.4.2. **All 94 automated tests passed (five deprecation warnings)**, and the GUI launched on the test machine. An end-to-end run with an external OCR application was **not** part of this verification; results on other platforms have not been confirmed.
 
 ## Working with pages
 
