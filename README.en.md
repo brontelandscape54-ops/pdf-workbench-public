@@ -23,7 +23,7 @@ The original PDF is not modified by opening, editing, or exporting it.
 
 Python 3.10 or later, Git, and compatible versions of PyMuPDF, Pillow, and PySide6 are required.
 
-**Verified: macOS (Apple Silicon). Windows and Linux have not been tested.** The Windows PowerShell commands below are suggested trial steps, not a verified installation or compatibility claim. The application is distributed as Python source, not as a double-clickable installer for either OS.
+**Verified: macOS (Apple Silicon) and Windows 10 x64 (Boot Camp). Linux has not been tested.** On September 26, 2026, the Windows PowerShell setup below was exercised with Python 3.13.15, including installation, GUI launch, major split/Bundle operations, restoration, and the automated test suite. Windows 11, Windows ARM64, x64-on-ARM emulation, and Linux remain unverified. The application is distributed as Python source, not as a double-clickable installer.
 
 For the first run, clone this repository, create a virtual environment, install the application and its dependencies, then open the GUI. Select the instructions for your OS.
 
@@ -40,7 +40,7 @@ python3 -m pdf_workbench
 
 The last command launches the GUI.
 
-### Windows (PowerShell; unverified trial instructions)
+### Windows (PowerShell; verified on Windows 10 x64)
 
 ```powershell
 git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
@@ -50,7 +50,7 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pdf_workbench
 ```
 
-These instructions assume that `py -3` selects a supported Python version (3.10 or later). They invoke the virtual environment's Python directly, so PowerShell virtual-environment activation and changes to the script execution policy are not required. A successful GUI launch alone would not establish that split/restore has been validated on Windows.
+These instructions assume that `py -3` selects a supported Python version (3.10 or later). They invoke the virtual environment's Python directly, so PowerShell virtual-environment activation and changes to the script execution policy are not required. This exact setup path was verified on Windows 10 Home 64-bit under Boot Camp with Python 3.13.15.
 
 ### Launching the GUI subsequently
 
@@ -62,7 +62,7 @@ macOS:
 ./.venv/bin/python -m pdf_workbench
 ```
 
-Windows (PowerShell; unverified):
+Windows (PowerShell):
 
 ```powershell
 .\.venv\Scripts\python.exe -m pdf_workbench
@@ -76,7 +76,9 @@ After the editable installation, install the test dependency with `python3 -m pi
 
 On September 22, 2026, the public edition was installed in a fresh macOS (Apple Silicon) virtual environment using Python 3.10.4, PyMuPDF 1.28.2, PySide6 6.11.2, Pillow 12.3.0, and pytest 8.4.2. **All 99 automated tests passed (five deprecation warnings)**, and the GUI launched. The central preview's ⌘A region selection was checked interactively in the development edition. An external-OCR split/restore workflow was also exercised in the public edition.
 
-**External-OCR field check (same date; one document):** A four-page, vertically typeset, scanned 1983 periodical was split after adjusting region output order, processed with external OCR, and restored to four pages. The supplied restored PDF retains page images and extractable text. In particular, an article on page 3 now starts with its title and introduction instead of its later section as in an earlier run. The OCR engine and version were not recorded. This is **not** a byte-by-byte or text-position comparison of the original, split, OCR-output, and restored PDFs; boundary-character loss, exact search-hit placement, quantitative recognition accuracy, and interoperability across engines/documents remain unverified. The source publication and OCR text are not distributed with this repository. Results on other platforms have not been confirmed.
+**Windows field validation (September 26, 2026):** On Windows 10 Home 64-bit under Boot Camp, using Python 3.13.15 and Git 2.55.0.windows.3, a fresh virtual environment was created from the README PowerShell instructions and populated with PyMuPDF 1.28.2, PySide6 6.11.2, and Pillow 12.3.0. The GUI launched successfully. PDF opening, manual split, auto split, `Export for OCR…`, `Open OCR Bundle…`, and `Restore OCR Results…` were exercised interactively. **All 99 automated tests passed in 4.23 seconds.** This Windows check did not include a full Windows-side external-OCR round trip in which newly generated searchable text was then verified for search/copy retention after restoration.
+
+**External-OCR field check (same date; one document):** A four-page, vertically typeset, scanned 1983 periodical was split after adjusting region output order, processed with external OCR, and restored to four pages. The supplied restored PDF retains page images and extractable text. In particular, an article on page 3 now starts with its title and introduction instead of its later section as in an earlier run. The OCR engine and version were not recorded. This is **not** a byte-by-byte or text-position comparison of the original, split, OCR-output, and restored PDFs; boundary-character loss, exact search-hit placement, quantitative recognition accuracy, and interoperability across engines/documents remain unverified. The source publication and OCR text are not distributed with this repository. The external-OCR field check above was performed on macOS; the later Windows validation covered the application workflow and automated tests, but not a Windows-side external-OCR text-retention round trip.
 
 ## Working with pages
 
