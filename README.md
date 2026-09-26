@@ -24,7 +24,7 @@
 
 Python 3.10以降と、PyMuPDF・Pillow・PySide6が必要です。使用するOS・Pythonのバージョンに対応した依存ライブラリをインストールしてください。GitとPythonをあらかじめ用意してください。
 
-**動作確認済み：macOS（Apple Silicon）。Windows・Linuxは未検証です。** 以下のWindows向けコマンドは、動作確認済みの手順ではなく、試用のための案内です。Windows・LinuxでのGUI操作やOCR後の復元結果は、まだ保証していません。現時点では、各OS向けのダブルクリックで起動できるアプリは配布しておらず、Pythonソースから起動します。
+**動作確認済み：macOS（Apple Silicon）および Windows 10 x64（Boot Camp）。Linuxは未検証です。** Windowsでは2026年9月26日にPython 3.13.15を使い、公開README記載のPowerShell手順によるインストール、GUI起動、主要な分割・Bundle操作、復元、自動テストを確認しました。Windows 11、Windows ARM64、ARM上のx64エミュレーション、Linuxは未検証です。現時点では、各OS向けのダブルクリックで起動できるアプリは配布しておらず、Pythonソースから起動します。
 
 初回のみ、GitHubからソースコードを取得し、仮想環境へアプリ本体と必要なライブラリをインストールします。お使いのOSに対応する手順を選んでください。
 
@@ -41,7 +41,7 @@ python3 -m pdf_workbench
 
 最後の `python3 -m pdf_workbench` でGUIが開きます。閉じるときはウィンドウを終了してください。
 
-### Windows（PowerShell・未検証の試用手順）
+### Windows（PowerShell・Windows 10 x64で動作確認済み）
 
 ```powershell
 git clone https://github.com/brontelandscape54-ops/pdf-workbench-public.git
@@ -51,7 +51,7 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pdf_workbench
 ```
 
-`py -3` でPython 3.10以降の対応バージョンが選択される環境を想定しています。Windows用の手順では仮想環境内のPythonを直接呼び出すため、PowerShellで仮想環境を有効化する必要はありません。GUIが起動しても、分割・復元を含む動作確認が済んだことにはなりません。
+`py -3` でPython 3.10以降の対応バージョンが選択される環境を想定しています。Windows用の手順では仮想環境内のPythonを直接呼び出すため、PowerShellで仮想環境を有効化する必要はありません。Windows 10 Home 64-bit（Boot Camp）とPython 3.13.15では、この手順からインストールとGUI起動を確認しています。
 
 ### 2回目以降にGUIを開く
 
@@ -63,7 +63,7 @@ macOS：
 ./.venv/bin/python -m pdf_workbench
 ```
 
-Windows（PowerShell・未検証）：
+Windows（PowerShell）：
 
 ```powershell
 .\.venv\Scripts\python.exe -m pdf_workbench
@@ -129,6 +129,8 @@ PDF Workbenchは、その**「OCRに先立ってページの分割・配置を�
 編集可能な状態でインストール後、`python3 -m pip install 'pytest>=8,<9'` でテスト用依存ライブラリを導入し、`python3 -m pytest` を実行できます。GUIの操作確認にはデスクトップ環境が必要です。
 
 2026年9月22日、公開版をmacOS（Apple Silicon）の独立した仮想環境へインストールし、Python 3.10.4・PyMuPDF 1.28.2・PySide6 6.11.2・Pillow 12.3.0・pytest 8.4.2で自動テスト **99件成功（非推奨API等に関する警告5件）** を確認しました。GUIの起動も確認しています。中央プレビューの⌘Aによる全領域選択は、開発版で実機操作を確認しました。公開版でもGUIを起動し、外部OCRを通した分割・復元を実施しています。
+
+**Windows実機確認（2026年9月26日）：** Intel MacのBoot Camp上のWindows 10 Home 64-bit、Python 3.13.15、Git 2.55.0.windows.3で、README記載のPowerShell手順から新規仮想環境を作成し、PyMuPDF 1.28.2・PySide6 6.11.2・Pillow 12.3.0を導入してGUIを起動しました。PDF読込、手動分割、自動分割、`Export for OCR…`、`Open OCR Bundle…`、`Restore OCR Results…`を実機で確認し、pytest **99件すべて成功（4.23秒）** を確認しました。今回のWindows確認では、Windows上で外部OCRを実行して新規に作成した検索可能PDFについて、復元後の検索・コピー保持までを一連で検証したものではありません。
 
 **外部OCRを含む実機検証（同日・個別事例）：** 画像化された縦書きの機関紙『泉』第26号（昭和58年11月1日、元の4ページ）を、領域の読み順を調整して分割し、外部OCRで処理した結果をWorkbenchで4ページへ復元しました。提示された復元PDFでは紙面画像と抽出可能なテキストが残り、特に3ページ目で、前回の復元PDFでは後半から始まっていた記事が見出し・「まえがき」から始まる順へ改善していました。使用したOCRソフト名・版は未記録です。元PDF・分割PDF・OCR結果PDF・復元PDFの4点を突き合わせた文字欠落／検索位置の精密な比較、OCR精度の定量評価、他の資料・OCRソフトでの互換性検証は**未実施**です。この記事の画像・OCRテキストは公開リポジトリには収録しません。
 
